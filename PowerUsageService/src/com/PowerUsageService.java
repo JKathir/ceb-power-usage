@@ -77,5 +77,13 @@ public class PowerUsageService {
 		
 		return output;
 	}
+	
+	@GET
+	@Path("/getPowerUsageByCustomer")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPowerUsageByCustomer() {
+		return powerUsageObj.getPowerUsageByCustomer();
+	}
+
 
 }

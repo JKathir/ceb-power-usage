@@ -78,5 +78,13 @@ public class PaymentService {
 
 		return output;
 	}
+	
+	@POST
+	@Path("/getCustomerPowerUsageByEmployee")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPaymentDetailsByCustomer(@FormParam("customerId") int customerId) {
+		return paymentObj.getCustomerPowerUsageByEmployee(customerId);
+	}
 
 }

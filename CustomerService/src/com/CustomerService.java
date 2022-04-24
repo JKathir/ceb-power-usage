@@ -82,4 +82,12 @@ public class CustomerService {
 		String output = customerObj.deleteCustomer(customerId);
 		return output;
 	}
+	
+	@POST
+	@Path("/getPowerUsageByCustomer")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getPowerUsageByCustomer(@FormParam("customerId") int customerId) {
+		return customerObj.getPowerUsageByCustomer(customerId);
+	}
 }

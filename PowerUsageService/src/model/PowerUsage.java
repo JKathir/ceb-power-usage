@@ -2,6 +2,16 @@ package model;
 
 import java.sql.*;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
 public class PowerUsage {
 	// A common method to connect to the DB
 	private Connection connect() {
@@ -136,5 +146,37 @@ public class PowerUsage {
 			System.err.println(e.getMessage());
 		}
 		return output;
+	}
+	
+	public String getPowerUsageByCustomer()
+	{
+		String output = "";
+		 JSONArray jsonArray = new JSONArray();
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+			}
+			// Prepare the html table to be displayed
+			String query = "select c.customer_name, c.address, c.telepohne_no, pu.units, pu.amount as Actual_amount, p.amount as Paid_amount, p.date from power_usage pu, customer c, payment p where (pu.customer_id = c.customer_id and c.customer_id = p.customer_id) AND pu.customer_id";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			// binding values
+			ResultSet rs = preparedStmt.executeQuery(query);
+			// iterate through the rows in the result set
+			while (rs.next()) {
+				int columns = rs.getMetaData().getColumnCount();
+				JSONObject obj = new JSONObject();
+				for (int i = 0; i < columns; i++)
+		            obj.put(rs.getMetaData().getColumnLabel(i + 1).toLowerCase(), rs.getObject(i + 1));
+		 
+		        jsonArray.put(obj);
+			}
+			con.close();
+			// Complete the html table
+		} catch (Exception e) {
+			output = "Error while reading the items.";
+			System.err.println(e.getMessage());
+		}
+		return jsonArray.toString();
 	}
 }

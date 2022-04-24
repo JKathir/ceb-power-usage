@@ -664,6 +664,124 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:8080/PaymentService/api/payments/getCustomerPowerUsageByEmployee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "customerId",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/PaymentService/api/payments/getCustomerPowerUsageByEmployee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PaymentService",
+						"api",
+						"payments",
+						"getCustomerPowerUsageByEmployee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/CustomerService/api/customer/getPowerUsageByCustomer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "customerId",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/CustomerService/api/customer/getPowerUsageByCustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CustomerService",
+						"api",
+						"customer",
+						"getPowerUsageByCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/EmployeeService/api/employee/getCustomerPowerUsageByEmployee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "employeeId",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/EmployeeService/api/employee/getCustomerPowerUsageByEmployee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"EmployeeService",
+						"api",
+						"employee",
+						"getCustomerPowerUsageByEmployee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/PowerUsageService/api/PowerUsage/getPowerUsageByCustomer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/PowerUsageService/api/PowerUsage/getPowerUsageByCustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"PowerUsageService",
+						"api",
+						"PowerUsage",
+						"getPowerUsageByCustomer"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -8,6 +8,9 @@ package model;
 //import java.sql.Statement;
 import java.sql.*;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Customer {
 
 	private Connection connect() {
@@ -134,6 +137,39 @@ public class Customer {
 			System.err.println(e.getMessage());
 		}
 		return output;
+	}
+	
+	public String getPowerUsageByCustomer(int customerId)
+	{
+		String output = "";
+		 JSONArray jsonArray = new JSONArray();
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+			}
+			// Prepare the html table to be displayed
+			String query = "select c.customer_name,c.address,c.telepohne_no,p.units,p.amount from customer c,power_usage p where p.customer_id = c.customer_id AND c.customer_id = " +customerId;
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+//			preparedStmt.setInt(1, customerId);
+			// binding values
+			ResultSet rs = preparedStmt.executeQuery(query);
+			// iterate through the rows in the result set
+			while (rs.next()) {
+				int columns = rs.getMetaData().getColumnCount();
+				JSONObject obj = new JSONObject();
+				for (int i = 0; i < columns; i++)
+		            obj.put(rs.getMetaData().getColumnLabel(i + 1).toLowerCase(), rs.getObject(i + 1));
+		 
+		        jsonArray.put(obj);
+			}
+			con.close();
+			// Complete the html table
+		} catch (Exception e) {
+			output = "Error while reading the items.";
+			System.err.println(e.getMessage());
+		}
+		return jsonArray.toString();
 	}
 
 }
